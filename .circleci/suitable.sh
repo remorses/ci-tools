@@ -2,4 +2,4 @@ set -ex
 
 LAST_SUITABLE=`git log -n 1 --pretty=format:%h -- $(find $1 | tr '\n' ' ')`
 LAST=`git log --pretty=format:'%h' -n 1`
-[ $LAST = $LAST_SUITABLE ] || exit 1 && echo suitable
+[ $LAST = $LAST_SUITABLE ] || exit 1
