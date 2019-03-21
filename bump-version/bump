@@ -21,11 +21,6 @@ new = ".".join(version.split(".")[:-1]) + "." + str(new)
 open("VERSION", "w").write(new)
 '
 
-# ssh-add -D
-# ssh-keyscan github.com >> githubKey
-# ssh-keygen -lf githubKey
-# cat githubKey >> ~/.ssh/known_hosts
-
 
 version=`cat VERSION`
 
