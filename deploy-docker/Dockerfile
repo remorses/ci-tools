@@ -7,4 +7,3 @@ RUN chmod +x /deploy
 RUN chmod +x /command
 
 CMD /command
-
