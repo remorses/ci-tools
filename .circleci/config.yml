@@ -9,7 +9,7 @@ jobs:
             - checkout
             - setup_remote_docker
             - run:
-               command:  "[ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /deploy) || echo not suitable"
+               command:  "[ `sh .circleci/suitable.sh ./deploy-docker/*` ] && (cd deploy-docker && /deploy) || echo not suitable"
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
