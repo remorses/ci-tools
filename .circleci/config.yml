@@ -31,9 +31,9 @@ jobs:
             - run:
                command: "[ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /bump) || echo not suitable"
             - run: 
-               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /bump) || echo not suitable"
+               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ]  && (cd deploy-pypi && /bump) || echo not suitable"
             - run: 
-               command: "[ `sh .circleci/suitable.sh ./bump-version` ] && (cd bump-version && /bump) || echo not suitable"
+               command: "[ `sh .circleci/suitable.sh ./bump-version` ]  && (cd bump-version && /bump) || echo not suitable"
 
 workflows:
     version: 2
