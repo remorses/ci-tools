@@ -4,7 +4,7 @@ jobs:
 
     deploy:
         docker:
-            - image: xmorse/deploy-docker:0.4.0
+            - image: cistuff/deploy-docker:0.4.0
         steps:
             - checkout
             - setup_remote_docker
@@ -28,7 +28,7 @@ jobs:
                   IMAGE_NAME: cistuff/bump-version
     bump:
         docker:
-            - image: xmorse/bump-version
+            - image: cistuff/bump-version
         steps:
             - checkout
             - run:
