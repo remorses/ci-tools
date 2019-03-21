@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+[ -z $TAG_FILE ] && TAG_FILE="./VERSION"
+[ -f $TAG_FILE ] || (echo "file with tag must exist, default is ./VERSION,\n custom file can be set with TAG_FILE" && exit 1)
+[ -z $USERNAME ] && (echo "env var USERNAME must be set" && exit 1)
+[ -z $REGISTRY ] && (echo "env var REGISTRY must be set" && exit 1)
+[ -z $PASSWORD ] && (echo "env var PASSWORD must be set" && exit 1)
+[ -z $IMAGE_NAME ] && (echo "env var IMAGE_NAME must be set" && exit 1)
+
+git config user.name "deploy docker"
+git config user.email "deploy@docker.com"
+
+git checkout master
+
+GIT_SSL_NO_VERIFY=1 git pull --no-edit --commit origin master
+
+version=`cat $TAG_FILE`
+
+docker login -u $USERNAME -p $PASSWORD $REGISTRY
+
+docker build -t "$REGISTRY/$IMAGE_NAME:latest" ./
+
+docker tag "$REGISTRY/$IMAGE_NAME:latest" "$REGISTRY/$IMAGE_NAME:$version"
+
+echo "deploying $REGISTRY/$IMAGE_NAME:latest"
+docker push "$REGISTRY/$IMAGE_NAME:latest"
+
+echo "deploying $REGISTRY/$IMAGE_NAME:$version"
+docker push "$REGISTRY/$IMAGE_NAME:$version"
