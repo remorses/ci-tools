@@ -34,8 +34,9 @@ jobs:
                command: sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /bump)
             - run: 
                command: sh .circleci/suitable.sh ./bump-version && (cd bump-version && /bump)
+
 workflows:
-    version: 2.1
+    version: 2
     test_and_deploy:
         jobs:
             - bump
