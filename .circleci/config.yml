@@ -9,17 +9,17 @@ jobs:
             - checkout
             - setup_remote_docker
             - run:
-               command:  sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /deploy)
+               command:  [ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
-               command: sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /deploy)
+               command: [ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-pypi
             - run: 
-               command: sh .circleci/suitable.sh ./bump-version && (cd bump-version && /deploy)
+               command: [ `sh .circleci/suitable.sh ./bump-version` ] && (cd bump-version && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump-version
@@ -29,11 +29,11 @@ jobs:
         steps:
             - checkout
             - run:
-               command: sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /bump)
+               command: [ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /bump)
             - run: 
-               command: sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /bump)
+               command: [ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /bump)
             - run: 
-               command: sh .circleci/suitable.sh ./bump-version && (cd bump-version && /bump)
+               command: [ `sh .circleci/suitable.sh ./bump-version` ] && (cd bump-version && /bump)
 
 workflows:
     version: 2
