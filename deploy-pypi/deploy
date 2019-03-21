@@ -2,12 +2,18 @@
 
 set -e
 
-GIT_SSL_NO_VERIFY=1 git pull --commit --no-edit origin
-
 [ -f ./VERSION ] || (echo "file VERSION containing current version is needed" && exit 1)
 [ -f ./setup.py ] || (echo "file setup.py is required" && exit 1)
 [ -z $USERNAME ] && (echo "env var USERNAME is required" && exit 1)
 [ -z $PASSWORD ] && (echo "env var PASSWORD is required" && exit 1)
+
+git config user.name "deploy docker"
+git config user.email "deploy@docker.com"
+
+git checkout master
+
+GIT_SSL_NO_VERIFY=1 git pull --no-edit --commit origin master
+
 
 python setup.py sdist bdist_wheel
 
