@@ -1,0 +1,47 @@
+
+version: 2
+jobs:
+    deploy:
+        docker:
+            - image: xmorse/deploy-docker
+        steps:
+            - checkout
+            - run:
+               command:  cd deploy-docker && /deploy
+               environment: 
+                  REGISTRY: docker.io
+                  IMAGE_NAME: cistuff/deploy-docker
+            - run: 
+               command: cd deploy-pypi && /deploy
+               environment: 
+                  REGISTRY: docker.io
+                  IMAGE_NAME: cistuff/deploy-pypi
+            - run: 
+               command: cd bump-version && /deploy
+               environment: 
+                  REGISTRY: docker.io
+                  IMAGE_NAME: cistuff/bump-version
+    bump:
+        docker:
+            - image: xmorse/bump-version
+        steps:
+            - checkout
+            - run:
+               command:  cd deploy-docker && /bump
+            - run: 
+               command: cd deploy-pypi && /bump
+            - run: 
+               command: cd bump-version && /bump
+
+
+
+
+
+workflows:
+    version: 2.1
+    test_and_deploy:
+        jobs:
+            - suitable
+            - deploy:
+                requires:
+                    - suitable
