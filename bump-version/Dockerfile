@@ -9,3 +9,4 @@ RUN chmod +x /bump
 RUN chmod +x /command
 
 CMD /command
+

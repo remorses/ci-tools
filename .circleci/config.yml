@@ -10,13 +10,13 @@ jobs:
             - setup_remote_docker
             - run:
                name: push deploy-docker
-               command:  "[ `sh .circleci/suitable.sh ./deploy-docker/*` ] && (cd deploy-docker && /deploy) || echo not suitable"
+               command:  "[ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /deploy) || echo not suitable"
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
-               name: bump deploy-pypi
-               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /deploy) || push not suitable"
+               name: push deploy-pypi
+               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /deploy) || echo not suitable"
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-pypi
