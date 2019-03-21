@@ -9,19 +9,19 @@ jobs:
             - checkout
             - setup_remote_docker
             - run:
-               name: bump deploy-docker
+               name: push deploy-docker
                command:  "[ `sh .circleci/suitable.sh ./deploy-docker/*` ] && (cd deploy-docker && /deploy) || echo not suitable"
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
                name: bump deploy-pypi
-               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /deploy) || echo not suitable"
+               command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ] && (cd deploy-pypi && /deploy) || push not suitable"
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-pypi
             - run: 
-               name: bump bump-version
+               name: push bump-version
                command: "[ `sh .circleci/suitable.sh ./bump-version` ] && (cd bump-version && /deploy) || echo not suitable"
                environment: 
                   REGISTRY: docker.io
@@ -32,13 +32,13 @@ jobs:
         steps:
             - checkout
             - run:
-               name: push deploy-docker
+               name: bump deploy-docker
                command: "[ `sh .circleci/suitable.sh ./deploy-docker` ] && (cd deploy-docker && /bump) || echo not suitable"
             - run: 
-               name: push deploy-pypi
+               name: bump deploy-pypi
                command: "[ `sh .circleci/suitable.sh ./deploy-pypi` ]  && (cd deploy-pypi && /bump) || echo not suitable"
             - run: 
-               name: push bump-version
+               name: bump bump-version
                command: "[ `sh .circleci/suitable.sh ./bump-version` ]  && (cd bump-version && /bump) || echo not suitable"
 
 workflows:
