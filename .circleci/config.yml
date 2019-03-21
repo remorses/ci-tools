@@ -1,23 +1,24 @@
 
 version: 2
 jobs:
+
     deploy:
         docker:
             - image: xmorse/deploy-docker:0.4.0
         steps:
             - checkout
             - run:
-               command:  cd deploy-docker && /deploy
+               command:  sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
-               command: cd deploy-pypi && /deploy
+               command: sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-pypi
             - run: 
-               command: cd bump-version && /deploy
+               command: sh .circleci/suitable.sh ./bump-version && (cd bump-version && /deploy)
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump-version
@@ -27,16 +28,11 @@ jobs:
         steps:
             - checkout
             - run:
-               command:  cd deploy-docker && /bump
+               command: sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /bump)
             - run: 
-               command: cd deploy-pypi && /bump
+               command: sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /bump)
             - run: 
-               command: cd bump-version && /bump
-
-
-
-
-
+               command: sh .circleci/suitable.sh ./bump-version && (cd bump-version && /bump)
 workflows:
     version: 2.1
     test_and_deploy:
