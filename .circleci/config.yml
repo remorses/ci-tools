@@ -28,7 +28,7 @@ jobs:
                   IMAGE_NAME: cistuff/bump-version
     bump:
         docker:
-            - image: cistuff/bump-version
+            - image: xmorse/bump-version
         steps:
             - checkout
             - run:
