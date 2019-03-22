@@ -10,7 +10,7 @@ git config  user.email "bump@version.com"
 git config  user.name "bump-version"
 
 git checkout master
-git pull --commit --no-editor https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
+git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
 # bump version
 python -c '\
