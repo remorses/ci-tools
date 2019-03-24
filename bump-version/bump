@@ -26,6 +26,6 @@ version=`cat VERSION`
 
 
 git add VERSION
-git commit -m "version $version" -m "[skip ci]"
+git commit -m "$TAG_PREFIX version $version" -m "[skip ci]"
 git tag  "$TAG_PREFIX$version"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD
