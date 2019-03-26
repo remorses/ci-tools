@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN apk add --no-cache git ssh-client
+RUN apk add --no-cache git
 
 RUN pip install -U --user --no-cache-dir setuptools wheel twine
 
