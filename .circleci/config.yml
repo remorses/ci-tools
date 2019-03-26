@@ -33,6 +33,8 @@ jobs:
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump
     bump:
+        environment:
+            VERSION_FILE: ./VERSION
         docker:
             - image: cistuff/bump
         steps:
