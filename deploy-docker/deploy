@@ -17,6 +17,8 @@ git checkout master
 
 GIT_SSL_NO_VERIFY=1 git pull --no-edit --commit origin master
 
+([ -n $GIT_CHECK ] || echo "skipping git check" && /suitable $GIT_CHECK) || echo "git check on $GIT_CHECK found this commit not suitable for deploy" && exit 0
+
 version=`cat $TAG_FILE`
 
 docker login -u $USERNAME -p $PASSWORD $REGISTRY
