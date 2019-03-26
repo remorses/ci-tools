@@ -14,7 +14,7 @@ git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
 # bump version
-([ -n $GIT_CHECK ] || echo "skipping git check" && /suitable $GIT_CHECK) && CONTINUE=1 || echo "git check on $GIT_CHECK found this commit not suitable for bump"
+( [ -n $GIT_CHECK ] || echo "skipping git check" && /suitable $GIT_CHECK ) && CONTINUE=1 || echo "git check on $GIT_CHECK found this commit not suitable for bump"
 
 [ -z $CONTINUE ] && exit 0
 
@@ -22,6 +22,6 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 version=`cat $VERSION_FILE`
 
 git add $VERSION_FILE
-git commit -m "$TAG_PREFIXversion $version" -m "[skip ci]"
-git tag "$TAG_PREFIX$version"
+git commit -m "${TAG_PREFIX}version ${version}" -m "[skip ci]"
+git tag "${TAG_PREFIX}${version}"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD
