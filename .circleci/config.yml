@@ -4,7 +4,7 @@ jobs:
 
     deploy:
         docker:
-            - image: cistuff/deploy-docker
+            - image: cistuff/deploy-docker:1.0.9
         steps:
             - checkout
             - setup_remote_docker
@@ -37,7 +37,7 @@ jobs:
             VERSION_FILE: ./VERSION
             GIT_CHECK: ./
         docker:
-            - image: cistuff/bump:1.0.5
+            - image: cistuff/bump:1.0.8
         steps:
             - checkout
             - run:

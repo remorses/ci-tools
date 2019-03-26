@@ -22,6 +22,6 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 version=`cat $VERSION_FILE`
 
 git add $VERSION_FILE
-git commit -m "${TAG_PREFIX}version ${version}" -m "[skip ci]"
+git commit -m "${TAG_PREFIX} ${version}" -m "[skip ci]"
 git tag "${TAG_PREFIX}${version}"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD
