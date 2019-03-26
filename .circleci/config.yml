@@ -36,7 +36,7 @@ jobs:
         environment:
             VERSION_FILE: ./VERSION
         docker:
-            - image: cistuff/bump
+            - image: xmorse/bump
         steps:
             - checkout
             - run:

@@ -18,7 +18,7 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 
 [ -z $CONTINUE ] && exit 0
 
-/script/bump --filename $VERSION_FILE
+(/script/bump --filename $VERSION_FILE)
 version=`cat $VERSION_FILE`
 
 git add $VERSION_FILE
