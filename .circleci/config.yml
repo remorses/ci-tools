@@ -34,7 +34,7 @@ jobs:
                   IMAGE_NAME: cistuff/bump
     bump:
         docker:
-            - image: cistuff/bump-version
+            - image: cistuff/bump
         steps:
             - checkout
             - run:
