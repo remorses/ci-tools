@@ -37,7 +37,7 @@ jobs:
             VERSION_FILE: ./VERSION
             GIT_CHECK: ./
         docker:
-            - image: cistuff/bump-version:
+            - image: cistuff/bump-version
         steps:
             - checkout
             - run:
