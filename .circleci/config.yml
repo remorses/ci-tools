@@ -4,7 +4,7 @@ jobs:
 
     deploy:
         docker:
-            - image: cistuff/deploy-docker:1.0.2
+            - image: cistuff/deploy-docker
         steps:
             - checkout
             - setup_remote_docker
