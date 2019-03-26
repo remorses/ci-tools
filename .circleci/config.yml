@@ -13,7 +13,7 @@ jobs:
             - setup_remote_docker
             - run:
                name: push deploy-docker
-               command:   deploy-docker && /deploy
+               command: cd deploy-docker && /deploy
                environment: 
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
