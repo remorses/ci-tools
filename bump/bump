@@ -14,9 +14,9 @@ git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
 # bump version
-( [ -n "$GIT_CHECK" ] || echo "skipping git check" && /suitable $GIT_CHECK ) && CONTINUE=1 || echo "git check on $GIT_CHECK found this commit not suitable for bump"
+( [ -n "$GIT_CHECK" ] || echo "skipping git check" && /suitable $GIT_CHECK ) && CONTINUE=1 || echo "git check on $GIT_CHECK found this commit not suitable for bump"
 
-[ -z "$CONTINUE" ] && exit 0
+[ -z "$CONTINUE" ] && exit 0
 
 (/script/bump --filename $VERSION_FILE)
 version=`cat $VERSION_FILE`
