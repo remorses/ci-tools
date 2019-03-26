@@ -4,33 +4,32 @@ jobs:
 
     deploy:
         docker:
-            - image: cistuff/deploy-docker:1.0.9
+            - image: cistuff/deploy-docker
+        environment:
+            GIT_CHECK: ./
+            REGISTRY: docker.io
         steps:
             - checkout
             - setup_remote_docker
             - run:
                name: push deploy-docker
-               command:  "sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /deploy) || echo not suitable"
+               command:   deploy-docker && /deploy
                environment: 
-                  REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-docker
             - run: 
                name: push deploy-pypi
-               command: "sh .circleci/suitable.sh ./deploy-pypi && (cd deploy-pypi && /deploy) || echo not suitable"
+               command: cd deploy-pypi && /deploy
                environment: 
-                  REGISTRY: docker.io
                   IMAGE_NAME: cistuff/deploy-pypi
             - run: 
                name: push bump-version
-               command: "sh .circleci/suitable.sh ./bump-version && (cd bump-version && /deploy) || echo not suitable"
+               command: cd bump-version && /deploy
                environment: 
-                  REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump-version
             - run: 
                name: push bump
-               command: "sh .circleci/suitable.sh ./bump && (cd bump && /deploy) || echo not suitable"
+               command: cd bump && /deploy
                environment: 
-                  REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump
     bump:
         environment:
