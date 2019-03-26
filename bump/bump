@@ -2,7 +2,6 @@
 
 set -e
 
-[ -Z $VERSION_FILE ] && VERSION_FILE=./VERSION
 [ \( -z "$REPOSITORY" \) -a \( ! -z "$CIRCLE_PROJECT_REPONAME" \) ] && REPOSITORY="$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
 [ -f $VERSION_FILE ] || (echo "file containing current version is needed, default is ./VERSION, customizable with VERSION_FILE env var" && exit 1)
 [ -z "$REPOSITORY" ] && (echo "env var REPOSITORY is needed when executing outside of circleci, (for exampe REPOSITORY=user/repo)" && exit 1) 
@@ -14,7 +13,7 @@ git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
 # bump version
-/script/bump --filename $VERSION_FILE
+([ -n $GIT_CHECK ] || echo "skipping git check" && /suitable $GIT_CHECK) && /script/bump --filename $VERSION_FILE || echo "git check on $GIT_CHECK found this commit not suitable for bump"
 
 version=`cat $VERSION_FILE`
 
