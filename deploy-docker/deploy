@@ -34,4 +34,3 @@ docker push "$REGISTRY/$IMAGE_NAME:latest"
 
 echo "deploying $REGISTRY/$IMAGE_NAME:$version"
 docker push "$REGISTRY/$IMAGE_NAME:$version"
-

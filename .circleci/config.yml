@@ -4,7 +4,7 @@ jobs:
 
     deploy:
         docker:
-            - image: cistuff/deploy-docker
+            - image: cistuff/deploy-docker:1.0.10
         environment:
             GIT_CHECK: ./
             REGISTRY: docker.io
