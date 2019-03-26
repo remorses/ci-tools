@@ -26,6 +26,12 @@ jobs:
                environment: 
                   REGISTRY: docker.io
                   IMAGE_NAME: cistuff/bump-version
+            - run: 
+               name: push bump
+               command: "sh .circleci/suitable.sh ./bump && (cd bump && /deploy) || echo not suitable"
+               environment: 
+                  REGISTRY: docker.io
+                  IMAGE_NAME: cistuff/bump
     bump:
         docker:
             - image: cistuff/bump-version
@@ -46,6 +52,11 @@ jobs:
                   TAG_PREFIX: bump-version_
                name: bump bump-version
                command: "sh .circleci/suitable.sh ./bump-version  && (cd bump-version && /bump) || echo not suitable"
+            - run:
+               environment:
+                  TAG_PREFIX: bump_
+               name: bump bump
+               command: "sh .circleci/suitable.sh ./bump  && (cd bump && /bump) || echo not suitable"
 
 workflows:
     version: 2
