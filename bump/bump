@@ -25,4 +25,3 @@ git add $VERSION_FILE
 git commit -m "$TAG_PREFIXversion $version" -m "[skip ci]"
 git tag "$TAG_PREFIX$version"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD
-

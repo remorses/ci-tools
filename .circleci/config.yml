@@ -4,7 +4,7 @@ jobs:
 
     deploy:
         docker:
-            - image: cistuff/deploy-docker
+            - image: cistuff/deploy-docker:1.0.2
         steps:
             - checkout
             - setup_remote_docker
@@ -35,30 +35,31 @@ jobs:
     bump:
         environment:
             VERSION_FILE: ./VERSION
+            GIT_CHECK: ./
         docker:
-            - image: cistuff/bump-version
+            - image: cistuff/bump:1.0.1
         steps:
             - checkout
             - run:
                environment:
                   TAG_PREFIX: deploy-docker_
                name: bump deploy-docker
-               command: "sh .circleci/suitable.sh ./deploy-docker && (cd deploy-docker && /bump) || echo not suitable"
+               command: cd deploy-docker && /bump
             - run: 
                environment:
                   TAG_PREFIX: deploy-pypi_
                name: bump deploy-pypi
-               command: "sh .circleci/suitable.sh ./deploy-pypi  && (cd deploy-pypi && /bump) || echo not suitable"
+               command: cd deploy-pypi && /bump
             - run:
                environment:
                   TAG_PREFIX: bump-version_
                name: bump bump-version
-               command: "sh .circleci/suitable.sh ./bump-version  && (cd bump-version && /bump) || echo not suitable"
+               command: cd bump-version && /bump
             - run:
                environment:
                   TAG_PREFIX: bump_
                name: bump bump
-               command: "sh .circleci/suitable.sh ./bump  && (cd bump && /bump) || echo not suitable"
+               command: cd bump && /bump
 
 workflows:
     version: 2
