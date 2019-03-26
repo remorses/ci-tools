@@ -37,7 +37,7 @@ jobs:
             VERSION_FILE: ./VERSION
             GIT_CHECK: ./
         docker:
-            - image: cistuff/bump:1.0.2
+            - image: cistuff/bump:1.0.1
         steps:
             - checkout
             - run:
