@@ -14,7 +14,7 @@ git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
 # bump version
-( [ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1) || echo "git check on $GIT_CHECK found this commit not suitable for bump"
+[ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1
 
 [ -z "$CONTINUE" ] && exit 0
 
