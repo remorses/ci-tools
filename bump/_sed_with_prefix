@@ -1,7 +1,7 @@
 #!/bin/sh
 # set -ex
 for FILE in `find . -not -path '*/\.*'`; do
-    LINE_NUMBER=`sed -n "/[bump when prefix is:[ ]+.*\]/=" $FILE`
+    LINE_NUMBER=`sed -n -E "/\[bump when prefix is:[ ]+.*\]/=" $FILE`
 
     PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\]/\1/p' $FILE`
 
