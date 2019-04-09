@@ -2,7 +2,7 @@
 
 for FILE in `find . -not -path '*/\.*' -type f`; do
     LINE_NUMBERS=`sed -n -E "/\[bump when prefix is:[ ]+.*\]/=" $FILE`
-    PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\]/\1/p' $FILE`
+    PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\].*/\1/p' $FILE`
     if [ -n "$LINE_NUMBERS" ]; then
         for LINE_NUMBER in $LINE_NUMBERS; do
             if [ "$PREFIX" = "$TAG_PREFIX" ]; then
