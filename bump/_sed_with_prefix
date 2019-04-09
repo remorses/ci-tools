@@ -1,12 +1,15 @@
 #!/bin/sh
-# set -ex
-for FILE in `find . -not -path '*/\.*'`; do
-    LINE_NUMBER=`sed -n -E "/\[bump when prefix is:[ ]+.*\]/=" $FILE`
 
+for FILE in `find . -not -path '*/\.*' -type f`; do
+    LINE_NUMBERS=`sed -n -E "/\[bump when prefix is:[ ]+.*\]/=" $FILE`
     PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\]/\1/p' $FILE`
-
-    if [ "$PREFIX" = "$TAG_PREFIX" ]; then
-        LINE_NUMBER=`let 'LINE_NUMBER++'`
-        sed -i -E "${LINE_NUMBER}s/(.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)/\1${VERSION}\3/g" $FILE
+    if [ -n "$LINE_NUMBERS" ]; then
+        for LINE_NUMBER in $LINE_NUMBERS; do
+            if [ "$PREFIX" = "$TAG_PREFIX" ]; then
+                echo "found a line to replace content: $LINE_NUMBER in $FILE"
+                let 'LINE_NUMBER++' || echo "let failed"
+                sed -i -E "${LINE_NUMBER}s/(.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)/\1${VERSION}\3/g" $FILE || echo "sed failed"
+            fi
+        done
     fi
 done

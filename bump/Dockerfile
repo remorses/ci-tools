@@ -1,4 +1,4 @@
-FROM treeder/bump:1.2.8
+FROM treeder/bump:
 
 RUN apk  add --no-cache git
 
