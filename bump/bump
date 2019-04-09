@@ -16,12 +16,15 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 # bump version
 [ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1
 
-[ -z "$CONTINUE" ] && exit 0
+[ -n "$CONTINUE" ] || exit 0
+
+[ -n "$TAG_PREFIX" ] || /_sed
+[ -z "$TAG_PREFIX" ] || /_sed_with_prefix
 
 (/script/bump --filename $VERSION_FILE)
-version=`cat $VERSION_FILE`
+VERSION=`cat $VERSION_FILE`
 
 git add $VERSION_FILE
-git commit -m "${TAG_PREFIX} ${version}" -m "[skip ci]"
-git tag "${TAG_PREFIX}${version}"
+git commit -m "${TAG_PREFIX} ${VERSION}" -m "[skip ci]"
+git tag "${TAG_PREFIX}${VERSION}"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD

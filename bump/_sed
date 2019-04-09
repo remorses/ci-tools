@@ -1,0 +1,8 @@
+#!/bin/sh
+# set -ex
+for FILE in `find . -not -path '*/\.*'`; do
+    LINE_NUMBER=`sed -n "/[bump[ ]+.*\]/=" $FILE`
+
+    LINE_NUMBER=`let 'LINE_NUMBER++'`
+    sed -i -E "${LINE_NUMBER}s/(.*)([0-9]+\.[0-9]+\.[0-9]+)(.*)/\1${VERSION}\3/g" $FILE
+done
