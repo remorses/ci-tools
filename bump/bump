@@ -18,8 +18,8 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 
 [ -n "$CONTINUE" ] || exit 0
 
-[ -n "$TAG_PREFIX" ] || /_sed
-[ -z "$TAG_PREFIX" ] || /_sed_with_prefix
+[ -n "$TAG_PREFIX" ] || (/_sed)
+[ -z "$TAG_PREFIX" ] || (/_sed_with_prefix)
 
 (/script/bump --filename $VERSION_FILE)
 VERSION=`cat $VERSION_FILE`
