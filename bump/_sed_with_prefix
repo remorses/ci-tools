@@ -5,9 +5,9 @@ REPO_PATH=`git rev-parse --show-toplevel`
 
 for FILE in `find $REPO_PATH -type f`; do
     LINE_NUMBERS=`sed -n -E "/\[bump when prefix is:[ ]+.*\].*/=" $FILE`
-    PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\].*/\1/p' $FILE`
     if [ -n "$LINE_NUMBERS" ]; then
         for LINE_NUMBER in $LINE_NUMBERS; do
+            PREFIX=`sed -n -E "${LINE_NUMBER}s/.*\[bump when prefix is:[ ]+(.*)\].*/\1/p" $FILE`
             echo "checking if line for prefix $PREFIX in $FILE is equal to $TAG_PREFIX"
             if [ "$PREFIX" = "$TAG_PREFIX" ]; then
                 echo "found a line to replace content: $LINE_NUMBER in $FILE"
