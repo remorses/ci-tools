@@ -4,7 +4,7 @@ echo 'running sed to replace "[bump]"'
 REPO_PATH=`git rev-parse --show-toplevel`
 
 for FILE in `find $REPO_PATH -type f`; do
-    LINE_NUMBERS=`sed -n -E "/\[bump[ ]+.*\].*/=" $FILE`
+    LINE_NUMBERS=`sed -n -E "/.*\[bump\].*/=" $FILE`
     if [ -n "$LINE_NUMBERS" ]; then
         for LINE_NUMBER in $LINE_NUMBERS; do
             echo "found a line to replace content: $LINE_NUMBER in $FILE"

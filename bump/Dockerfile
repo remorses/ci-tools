@@ -1,6 +1,6 @@
 FROM treeder/bump:1.2.8
 
-RUN apk  add --no-cache git
+RUN apk  add --no-cache git sed
 
 COPY ./bump /bump
 COPY ./suitable /suitable
