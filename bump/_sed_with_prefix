@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
 echo 'running sed to replace "[bump when prefix is: ...]"'
-for FILE in `find . -type f`; do
+REPO_PATH=`git rev-parse --show-toplevel`
+
+for FILE in `find $REPO_PATH -type f`; do
     LINE_NUMBERS=`sed -n -E "/\[bump when prefix is:[ ]+.*\].*/=" $FILE`
     PREFIX=`sed -n -E 's/.*\[bump when prefix is:[ ]+(.*)\].*/\1/p' $FILE`
     if [ -n "$LINE_NUMBERS" ]; then
