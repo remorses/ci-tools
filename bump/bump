@@ -24,7 +24,7 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 (/script/bump --filename $VERSION_FILE)
 VERSION=`cat $VERSION_FILE`
 
-git add .
+git add -A 
 git commit -m "${TAG_PREFIX} ${VERSION}" -m "[skip ci]"
 git tag "${TAG_PREFIX}_${VERSION}"
 git push  --tags  https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git HEAD
