@@ -21,11 +21,13 @@ ls
 
 [ -n "$CONTINUE" ] || exit 0
 
-[ -n "$TAG_PREFIX" ] || (/_sed)
-[ -z "$TAG_PREFIX" ] || (/_sed_with_prefix)
+
 
 (/script/bump --filename $VERSION_FILE)
 VERSION=`cat $VERSION_FILE`
+
+[ -n "$TAG_PREFIX" ] || (/_sed)
+[ -z "$TAG_PREFIX" ] || (/_sed_with_prefix)
 
 git add -A 
 git commit -m "${TAG_PREFIX} ${VERSION}" -m "[skip ci]"
