@@ -13,6 +13,9 @@ git config  user.name "bump-version"
 git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
+echo ls
+ls
+
 # bump version
 [ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1
 
