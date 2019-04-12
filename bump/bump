@@ -13,8 +13,6 @@ git config  user.name "bump-version"
 git checkout master
 git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git master
 
-echo ls
-ls
 
 # bump version
 [ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1
@@ -24,10 +22,10 @@ ls
 
 
 (/script/bump --filename $VERSION_FILE)
-VERSION=`cat $VERSION_FILE`
+export VERSION=`cat $VERSION_FILE`
 
-[ -n "$TAG_PREFIX" ] || (/_sed)
-[ -z "$TAG_PREFIX" ] || (/_sed_with_prefix)
+[ -n "$TAG_PREFIX" ] || /_sed
+[ -z "$TAG_PREFIX" ] || /_sed_with_prefix
 
 git add -A 
 git commit -m "${TAG_PREFIX} ${VERSION}" -m "[skip ci]"
