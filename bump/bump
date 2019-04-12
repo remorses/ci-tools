@@ -24,8 +24,8 @@ git pull --commit --no-edit https://${GITHUB_TOKEN}@github.com/${REPOSITORY}.git
 (/script/bump --filename $VERSION_FILE)
 export VERSION=`cat $VERSION_FILE`
 
-[ -n "$TAG_PREFIX" ] || /_sed
-[ -z "$TAG_PREFIX" ] || /_sed_with_prefix
+[ -n "$TAG_PREFIX" ] || (/_sed)
+[ -z "$TAG_PREFIX" ] || (/_sed_with_prefix)
 
 git add -A 
 git commit -m "${TAG_PREFIX} ${VERSION}" -m "[skip ci]"
