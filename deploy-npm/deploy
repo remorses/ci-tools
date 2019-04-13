@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+[ -f ./VERSION ] || (echo "file VERSION containing current version is needed" && exit 1)
+[ -f ./package.json ] || (echo "file package.json is required" && exit 1)
+[ -z $NPM_TOKEN ] && (echo "env var NPM_TOKEN is required" && exit 1)
+
+
+git config user.name "deploy npm"
+git config user.email "npm@deploy.com"
+
+git checkout master
+GIT_SSL_NO_VERIFY=1 git pull --no-edit --commit origin master
+
+[ -z "$GIT_CHECK" ] || /suitable $GIT_CHECK && CONTINUE=1
+
+[ -z "$CONTINUE" ] && exit 0
+
+echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+
+npm publish

@@ -7,8 +7,8 @@ set -e
 [ -z $USERNAME ] && (echo "env var USERNAME is required" && exit 1)
 [ -z $PASSWORD ] && (echo "env var PASSWORD is required" && exit 1)
 
-git config user.name "deploy docker"
-git config user.email "deploy@docker.com"
+git config user.name "deploy pypi"
+git config user.email "pypi@deploy.com"
 
 git checkout master
 GIT_SSL_NO_VERIFY=1 git pull --no-edit --commit origin master

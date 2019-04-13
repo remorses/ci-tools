@@ -11,7 +11,7 @@ set -e
 [ -z $IMAGE_NAME ] && (echo "env var IMAGE_NAME must be set" && exit 1)
 
 git config user.name "deploy docker"
-git config user.email "deploy@docker.com"
+git config user.email "docker@deploy.com"
 
 git checkout master
 

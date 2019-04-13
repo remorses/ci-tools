@@ -22,10 +22,10 @@ jobs:
                environment: 
                   IMAGE_NAME: cistuff/deploy-pypi
             - run: 
-               name: push bump-version
-               command: cd bump-version && /deploy
+               name: push deploy-npm
+               command: cd deploy-npm && /deploy
                environment: 
-                  IMAGE_NAME: cistuff/bump-version
+                  IMAGE_NAME: cistuff/deploy-npm
             - run: 
                name: push bump
                command: cd bump && /deploy
@@ -51,9 +51,9 @@ jobs:
                command: cd deploy-pypi && /bump
             - run:
                environment:
-                  TAG_PREFIX: bump-version_
-               name: bump bump-version
-               command: cd bump-version && /bump
+                  TAG_PREFIX: deploy-npm_
+               name: bump deploy-npm
+               command: cd deploy-npm && /bump
             - run:
                environment:
                   TAG_PREFIX: bump_
